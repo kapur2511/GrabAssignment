@@ -20,7 +20,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
 import android.util.Log;
-import android.view.View;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.gson.Gson;
@@ -42,7 +41,6 @@ import com.grab.grabtest.utils.pagination.PaginationScrollListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import javax.inject.Inject;

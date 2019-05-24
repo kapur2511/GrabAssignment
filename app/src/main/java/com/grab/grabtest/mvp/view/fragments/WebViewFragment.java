@@ -52,9 +52,15 @@ public class WebViewFragment extends Fragment {
         webView.getSettings().setAppCachePath(getContext().getCacheDir().getPath());
         webView.getSettings().setCacheMode(WebSettings.LOAD_DEFAULT);
         webView.loadUrl(newsURL);
-        if(!imageURL.isEmpty())
+        if(imageURL!=null && !imageURL.isEmpty())
             Picasso.get().load(imageURL).fit().into(imageViewCover);
         return fragmentView;
+    }
+
+    @Override
+    public void onDestroy() {
+        unbinder.unbind();
+        super.onDestroy();
     }
 
     private String imageURL, newsURL;

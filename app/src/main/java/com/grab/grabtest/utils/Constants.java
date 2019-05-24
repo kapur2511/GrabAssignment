@@ -15,7 +15,7 @@ package com.grab.grabtest.utils;
 public class Constants {
 
     public static final String API_KEY              = "a01bad23a8de49028eb4c1227bdc3513";
-    public static final String BASE_URL             = "https://newsapi.org/v2/";
+    public static String BASE_URL                   = "https://newsapi.org/v2/";
     public static final String PREF_CURRENT_TIME    = "pref.current.data";
     public static final String PREF_CACHE_DATA      = "pref.cache.data";
     public static final String PREF_CURRENT_PAGE    = "pref.current.page";
