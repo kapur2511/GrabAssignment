@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) 11-May-2019 Cricbuzz.com
+  ~ Copyright (C) 24-May-2019 Cricbuzz.com
   ~ All rights reserved.
   ~
   ~ http://www.cricbuzz.com
@@ -20,6 +20,6 @@
     <dimen name="margin_50dp">50dp</dimen>
     <dimen name="margin_8dp">8dp</dimen>
     <dimen name="adapter_item_height">80dp</dimen>
-    <dimen name="player_height">250dp</dimen>
+    <dimen name="news_height">200dp</dimen>
     <dimen name="error_retry_margin">44dp</dimen>
 </resources>

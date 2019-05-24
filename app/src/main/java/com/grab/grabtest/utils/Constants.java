@@ -21,6 +21,8 @@ public class Constants {
     public static final String PREF_CURRENT_PAGE    = "pref.current.page";
     public static final String PREF_NEXT_PAGE_TOKEN = "pref.next.page.token";
     public static final String PREF_TOTAL_PAGES     = "pref.total.pages";
+    public static final String IMAGE_URL            = "image.url";
+    public static final String NEWS_URL             = "news.url";
     public static final int    RESPONSE_PER_PAGE    = 20;
 
     public static final int    SHOULD_USE_CACHE     = 100;

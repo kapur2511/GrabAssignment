@@ -28,7 +28,7 @@ public class CommonUtils {
         return (info != null && info.isConnected());
     }
 
-    public static int shouldUseCache(long lastFetchTime, List<ListItem> cacheData, boolean isConnected){
+    public static int getCacheStatus(long lastFetchTime, List<ListItem> cacheData, boolean isConnected){
         if(isConnected && ((System.currentTimeMillis() - lastFetchTime) > 300000))
             return SHOULD_NOT_USE_CACHE;
         else if(isConnected && ((System.currentTimeMillis() - lastFetchTime) < 300000) && cacheData!=null && cacheData.size()>0)

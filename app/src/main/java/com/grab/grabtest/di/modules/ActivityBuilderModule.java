@@ -13,6 +13,7 @@
 package com.grab.grabtest.di.modules;
 
 import com.grab.grabtest.mvp.view.activities.NewsListActivity;
+import com.grab.grabtest.mvp.view.activities.WebViewActivity;
 
 import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
@@ -21,5 +22,8 @@ import dagger.android.ContributesAndroidInjector;
 public abstract class ActivityBuilderModule {
 
     @ContributesAndroidInjector(modules = NewsListActivityModule.class)
-    abstract NewsListActivity bindNyitoActivity();
+    abstract NewsListActivity bindNewsListActivity();
+
+    @ContributesAndroidInjector()
+    abstract WebViewActivity bindWebViewActivity();
 }
