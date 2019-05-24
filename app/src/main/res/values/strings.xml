@@ -1,0 +1,12 @@
+<!--
+  ~ Copyright (C) 23-May-2019 Cricbuzz.com
+  ~ All rights reserved.
+  ~
+  ~ http://www.cricbuzz.com
+  ~ @author: kshitiz.kapur
+  -->
+
+<resources>
+    <string name="app_name">GrabTest</string>
+    <string name="error_string">Something went wrong at our end!</string>
+</resources>
