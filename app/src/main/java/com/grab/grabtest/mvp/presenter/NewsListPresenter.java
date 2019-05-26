@@ -67,7 +67,7 @@ public class NewsListPresenter extends BasePresenter<NewsListRenderer> {
             }).flatMap(new Function<Response<NewsListModel>, ObservableSource<NewsListModel>>() {
                 @Override
                 public ObservableSource<NewsListModel> apply(Response<NewsListModel> newsListModelResponse) throws Exception {
-                    Log.d(TAG, "========="+newsListModelResponse.message());
+                    Log.d(TAG, "========="+newsListModelResponse.body());
                     return Observable.just(newsListModelResponse.body());
                 }
             }).flatMapIterable(new Function<NewsListModel, Iterable<ArticlesModel>>() {

@@ -55,12 +55,12 @@ public class NewsViewModel implements ListItem{
     @Override
     public String toString() {
         return "NewsViewModel{" +
-                "publishedAt='" + publishedAt + '\'' +
-                ", author='" + author + '\'' +
-                ", urlToImage='" + urlToImage + '\'' +
-                ", description='" + description + '\'' +
-                ", title='" + title + '\'' +
-                ", articleUrl='" + articleUrl + '\'' +
+//                "publishedAt='" + publishedAt + '\'' +
+//                ", author='" + author + '\'' +
+//                ", urlToImage='" + urlToImage + '\'' +
+//                ", description='" + description + '\'' +
+                ", title='" + title.substring(0,10) + '\'' +
+//                ", articleUrl='" + articleUrl + '\'' +
                 '}';
     }
 }

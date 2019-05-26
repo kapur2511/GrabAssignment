@@ -28,12 +28,6 @@ public class ApplicationModule {
 
     @Provides
     @Singleton
-    static FusedLocationProviderClient provideFusedLocationProviderClient(Context context) {
-        return LocationServices.getFusedLocationProviderClient(context);
-    }
-
-    @Provides
-    @Singleton
     public static SharedPreferences provideSharedPreferences(Context context){
         return context.getSharedPreferences("Grab",Context.MODE_PRIVATE);
     }

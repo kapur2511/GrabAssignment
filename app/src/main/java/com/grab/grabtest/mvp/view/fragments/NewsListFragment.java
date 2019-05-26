@@ -93,36 +93,6 @@ public class NewsListFragment extends BaseFragment<NewsListPresenter, NewsListRe
                default:
                    switchUI(false, false, true);
         }
-//        if(CommonUtils.isConnected(getContext()) && adapter!=null && adapter.getItemCount()==0){
-//            stringObjectHashMap.put("country","in");
-//            if(getContext()!=null){
-//                TelephonyManager manager = (TelephonyManager)getContext().getSystemService(Context.TELEPHONY_SERVICE);
-//                String countryCode=manager.getSimCountryIso();
-//                Log.d(TAG,"countryCode: "+countryCode);
-//                stringObjectHashMap.put("country","in");
-//            }
-//            stringObjectHashMap.put("apiKey", Constants.API_KEY);
-//            if(stringObjectHashMap.containsKey("page"))
-//                stringObjectHashMap.remove("page");
-//            if((System.currentTimeMillis() - lastFetchTime) > 300000)
-//                presenter.loadData(stringObjectHashMap);
-//            else{
-//                List<ListItem> listItems = getCachedListData(Constants.PREF_CACHE_DATA, new TypeToken<List<NewsViewModel>>(){}.getType());
-//                currentPage   = sharedPreferences.getInt(Constants.PREF_CURRENT_PAGE, 1);
-//                nextPageToken = sharedPreferences.getInt(Constants.PREF_NEXT_PAGE_TOKEN,currentPage+1);
-//                totalPages    = sharedPreferences.getInt(Constants.PREF_TOTAL_PAGES, 0);
-//                if(listItems!=null){
-//                    adapter.addItems(listItems);
-//                    switchUI(true, false, false);
-//                }
-//                else
-//                    switchUI(false, false, true);
-//            }
-//        }else if(adapter!=null && adapter.getItemCount()>0){
-//            switchUI(true, false, false);
-//        }else{
-//
-//        }
     }
 
     @Override
@@ -141,19 +111,21 @@ public class NewsListFragment extends BaseFragment<NewsListPresenter, NewsListRe
     public void renderNewsList(NewsListViewModel newsListViewModel) {
         Log.d(TAG, newsListViewModel.toString());
         isLoading = false;
-        BaseListAdapter baseListAdapter = (BaseListAdapter) recyclerViewNewsList.getAdapter();
-        baseListAdapter.addItems(newsListViewModel.getNewsViewModels());
+        adapter = (NewsListAdapter) recyclerViewNewsList.getAdapter();
+        adapter.addItems(newsListViewModel.getNewsViewModels());
         if(currentPage<presenter.getTotalPages())
-            baseListAdapter.addLoadingItem();
-        else
-            baseListAdapter.removeLoadingItem();
+            adapter.addLoadingItem();
+        else{
+            adapter.removeLoadingItem();
+            adapter.setLoading(false);
+        }
         switchUI(true, false, false);
         sharedPreferences.edit().putLong(Constants.PREF_CURRENT_TIME, System.currentTimeMillis()).apply();
         Gson gson = new Gson();
         String json = gson.toJson(adapter.getList());
         Log.d(TAG,"SAVING DATA: "+json);
         sharedPreferences.edit().putString(Constants.PREF_CACHE_DATA, json).apply();
-        nextPageToken = currentPage++;
+        nextPageToken = currentPage+1;
         sharedPreferences.edit().putInt(Constants.PREF_NEXT_PAGE_TOKEN, nextPageToken).apply();
         if(totalPages == 0){
             totalPages = presenter.getTotalPages();
@@ -218,13 +190,7 @@ public class NewsListFragment extends BaseFragment<NewsListPresenter, NewsListRe
     @BindView(R.id.rv_list)
     RecyclerView recyclerViewNewsList;
 
-    @Inject
-    FusedLocationProviderClient fusedLocationClient;
-
     private Map<String, Object> stringObjectHashMap = new HashMap<>();
     private boolean isLastPage, isLoading;
     private int currentPage = 1, totalPages, nextPageToken;
-    private String cityName;
-    private AlertDialog alertDialog;
-    private final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 }

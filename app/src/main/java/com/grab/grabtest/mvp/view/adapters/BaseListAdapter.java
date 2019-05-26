@@ -59,21 +59,20 @@ public abstract class BaseListAdapter<H> extends RecyclerView.Adapter<BaseViewHo
     }
 
     public void addLoadingItem(){
-        this.list.add(null);
+        list.add(null);
         notifyItemInserted(list.size()-1);
     }
 
     public void addItems(List<H> list){
         if(this.list!=null && this.list.size()==0){
             this.list = list;
-            notifyItemRangeInserted(0,this.list.size());
+            notifyItemRangeInserted(0, list.size());
         }
         else if(this.list!=null){
             Log.d("LIST LAST: ","==="+this.list.get(this.list.size()-1));
-            if(this.list.get(this.list.size()-1) == null)
-                removeLoadingItem();
+            removeLoadingItem();
             int startPos = this.list.size();
-            this.list.addAll(list);
+            this.list.addAll(startPos,list);
             notifyItemRangeInserted(startPos, list.size());
             Log.d("LIST: ",this.list.toString());
         }
@@ -85,8 +84,10 @@ public abstract class BaseListAdapter<H> extends RecyclerView.Adapter<BaseViewHo
 
     public void removeLoadingItem(){
         Log.d("LIST REMOVE LOADER: ",this.list.toString());
-        this.list.remove(list.size()-1);
-        notifyItemRemoved(list.size()-1);
+        if(list.get(list.size()-1) == null){
+            list.remove(list.size()-1);
+            notifyItemRemoved(list.size()-1);
+        }
     }
 
     protected abstract int getLayoutId(int viewType) throws RuntimeException;

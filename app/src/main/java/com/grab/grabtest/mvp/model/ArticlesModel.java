@@ -107,6 +107,6 @@ public class ArticlesModel {
     @Override
     public String toString()
     {
-        return "ArticlesModel [publishedAt = "+publishedAt+", author = "+author+", urlToImage = "+urlToImage+", description = "+description+", source = "+source+", title = "+title+", url = "+url+", content = "+content+"]";
+        return "ArticlesModel, title = "+title+"]";
     }
 }

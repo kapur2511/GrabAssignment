@@ -13,6 +13,7 @@
 package com.grab.grabtest.mvp.view.viewholders;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,8 +38,9 @@ public class NewsListItemViewHolder<H extends ListItem> extends BaseViewHolder<L
     public void setData(ListItem data) {
         this.listItem = data;
         NewsViewModel newsViewModel = (NewsViewModel) data;
-        if(!newsViewModel.getUrlToImage().isEmpty())
+        if(newsViewModel.getUrlToImage()!=null && !newsViewModel.getUrlToImage().isEmpty())
             Picasso.get().load(newsViewModel.getUrlToImage()).fit().into(imageViewThumbnail);
+        Log.d("NEWS: ",newsViewModel.toString());
         textViewTitle.setText(newsViewModel.getTitle());
         textViewDescription.setText(newsViewModel.getDescription());
     }
