@@ -59,8 +59,7 @@ public class NewsListAdapter<H extends ListItem> extends BaseListAdapter<H>{
         Log.d("VIEW_HOLDER: ",viewHolder.getClass().getSimpleName());
         Log.d("VIEW_HOLDER POSITION: ",""+position);
         Log.d("VIEW_HOLDER DATA: ",""+list.get(position));
-        if(position<list.size()-1)
-            viewHolder.setData(list.get(position));
+        viewHolder.setData(list.get(position));
     }
 
     @Override
