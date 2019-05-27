@@ -8,7 +8,7 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#F5F6F7</color>
+    <color name="colorPrimary">#000000</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#D81B60</color>
     <color name="appBackground">#F5F6F7</color>

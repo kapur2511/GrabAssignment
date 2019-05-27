@@ -15,19 +15,16 @@ package com.grab.grabtest.mvp.view.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.os.ConfigurationCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.telephony.TelephonyManager;
 import android.util.Log;
 
-import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.grab.grabtest.R;
 import com.grab.grabtest.mvp.presenter.NewsListPresenter;
 import com.grab.grabtest.mvp.view.activities.WebViewActivity;
-import com.grab.grabtest.mvp.view.adapters.BaseListAdapter;
 import com.grab.grabtest.mvp.view.adapters.NewsListAdapter;
 import com.grab.grabtest.mvp.view.renderer.NewsListRenderer;
 import com.grab.grabtest.mvp.view.viewmodel.ListItem;
@@ -42,8 +39,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.inject.Inject;
 
 import butterknife.BindView;
 
@@ -61,6 +56,10 @@ public class NewsListFragment extends BaseFragment<NewsListPresenter, NewsListRe
     }
 
 
+    /**
+     * Cached data has an expiry of 5 minutes. So after 5 minutes if we open the app it'll check if
+     * internet is there and fetch the new data else use the cache.
+     * */
     @Override
     protected void loadData(NewsListPresenter presenter) {
         long lastFetchTime = sharedPreferences.getLong(Constants.PREF_CURRENT_TIME,0);
@@ -70,8 +69,10 @@ public class NewsListFragment extends BaseFragment<NewsListPresenter, NewsListRe
                 currentPage   = sharedPreferences.getInt(Constants.PREF_CURRENT_PAGE, 1);
                 nextPageToken = sharedPreferences.getInt(Constants.PREF_NEXT_PAGE_TOKEN,currentPage+1);
                 totalPages    = sharedPreferences.getInt(Constants.PREF_TOTAL_PAGES, 0);
-                if(listItems!=null && adapter!=null && adapter.getItemCount() == 0)
+                if(listItems!=null && adapter!=null && adapter.getItemCount() == 0){
                     adapter.addItems(listItems);
+                    adapter.setLoading(false);
+                }
 
                 switchUI(true, false, false);
                 break;
@@ -86,6 +87,7 @@ public class NewsListFragment extends BaseFragment<NewsListPresenter, NewsListRe
                 stringObjectHashMap.put("apiKey", Constants.API_KEY);
                 if(stringObjectHashMap.containsKey("page"))
                     stringObjectHashMap.remove("page");
+                adapter.setLoading(true);
                 presenter.loadData(stringObjectHashMap);
                 break;
             case NO_CACHE_AND_INTERNET:
